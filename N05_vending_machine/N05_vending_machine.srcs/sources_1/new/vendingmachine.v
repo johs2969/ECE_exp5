@@ -27,26 +27,20 @@ always @(negedge rst or posedge clk) begin
 end    
         
 always @(negedge rst or posedge clk) begin
-    if(!rst) state <= S0;
+    if(!rst) begin state <= S0;
+    y <=0;
+    end
     else begin
         case(state)
             S0 : state <= A_trig ? S50 : B_trig ? S100 :S0;      
             S50 : state <= A_trig ? S100 : B_trig ? S150 :S50;     
             S100 : state <= A_trig ? S150 : B_trig ? S200 :S100;     
             S150 : state <= A_trig ? S200 : B_trig ? S200 :S150;     
-            S200 : state <= A_trig ? S200 : B_trig ? S200 : C_trig ? S0: S200 ;
+            S200 : begin state <= A_trig ? S200 : B_trig ? S200 : C_trig ? S0: S200 ;
+                        y <=C_trig ? 1:0;
+                        end
        endcase
    end      
-end
-  
-always @(negedge rst or posedge clk) begin
-    if(!rst) y <=0;
-    else begin
-        case(state)
-            S200 : y <=C_trig ? 1:0;
-            default : y <= 0;
-        endcase
-    end
 end
                
 endmodule

@@ -16,3 +16,5 @@ set_property PACKAGE_PIN L4 [get_ports {state[2]}]
 set_property PACKAGE_PIN M4 [get_ports {state[1]}]
 set_property PACKAGE_PIN M2 [get_ports {state[0]}]
 set_property PACKAGE_PIN M7 [get_ports y]
+
+
